@@ -4,9 +4,13 @@ import app from './app'
 import config from './config/index'
 import { errorlogger, logger } from './shared/logger'
 
-async function serverFunction() {
-  let server: Server
+process.on('uncaughtException', error => {
+  errorlogger.error('Uncaught exception error', error)
+  process.exit(1)
+})
 
+let server: Server
+async function serverFunction() {
   try {
     await mongoose.connect(config.database_url as string)
     logger.info('🗃️ database connection successful')
@@ -21,7 +25,7 @@ async function serverFunction() {
   process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
-        errorlogger.error(error)
+        errorlogger.error('Unhandled error ~ ', error)
         process.exit(1)
       })
     } else {
@@ -31,3 +35,10 @@ async function serverFunction() {
 }
 
 serverFunction()
+
+process.on('SIGTERM', () => {
+  logger.info('sigterm is received')
+  if (server) {
+    server.close()
+  }
+})

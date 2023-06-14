@@ -45,7 +45,7 @@ const errorlogger = createLogger({
         process.cwd(),
         'logs',
         'winston',
-        'successes',
+        'errors',
         'risu-%DATE%-error.log'
       ),
       datePattern: 'YYYY-DD-MM-HH',

@@ -21,6 +21,9 @@ const userSchema = new Schema<IUser>(
   {
     //for createdAt and updatedAt field
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
 

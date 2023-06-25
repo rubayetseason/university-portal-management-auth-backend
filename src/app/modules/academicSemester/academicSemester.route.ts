@@ -12,6 +12,7 @@ router.post(
 );
 
 router.get('/:id', AcademicSemesterController.getSingleSemester);
+router.delete('/:id', AcademicSemesterController.deleteSemester);
 
 router.patch(
   '/:id',

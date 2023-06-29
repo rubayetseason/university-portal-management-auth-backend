@@ -25,19 +25,16 @@ const userSchema = new Schema<IUser>(
     //   type: Schema.Types.ObjectId,
     //   ref: 'Faculty',
     // },
-    // admin: {
+    // Admin: {
     //   type: Schema.Types.ObjectId,
     //   ref: 'Admin',
     // },
   },
   {
-    //for createdAt and updatedAt field
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
   }
 );
-
-//connect user model and schema together here
 export const User = model<IUser, UserModel>('User', userSchema);

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-dgetAllFacultiesisable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import mongoose, { SortOrder } from 'mongoose';
+import { SortOrder } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
@@ -108,25 +108,14 @@ const deleteFaculty = async (id: string): Promise<IFaculty | null> => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Faculty not found !');
   }
 
-  const session = await mongoose.startSession();
-
-  try {
-    session.startTransaction();
-    //delete faculty first
-    const faculty = await Faculty.findOneAndDelete({ id }, { session });
-    if (!faculty) {
-      throw new ApiError(404, 'Failed to delete student');
-    }
-    //delete user
-    await User.deleteOne({ id });
-    session.commitTransaction();
-    session.endSession();
-
-    return faculty;
-  } catch (error) {
-    session.abortTransaction();
-    throw error;
+  //delete faculty first
+  const faculty = await Faculty.findOneAndDelete({ id });
+  if (!faculty) {
+    throw new ApiError(404, 'Failed to delete student');
   }
+  //delete user
+  await User.deleteOne({ id });
+  return faculty;
 };
 
 export const FacultyService = {

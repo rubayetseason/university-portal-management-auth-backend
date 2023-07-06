@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose, { SortOrder } from 'mongoose';
+import httpStatus from 'http-status';
+import { SortOrder } from 'mongoose';
+import ApiError from '../../../errors/ApiError';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { paginationHelpers } from '../../../shared/paginationHelper';
+import { User } from '../users/users.model';
 import { adminSearchableFields } from './admin.constant';
 import { IAdmin, IAdminFilters } from './admin.interface';
 import { Admin } from './admin.model';
-import httpStatus from 'http-status';
-import ApiError from '../../../errors/ApiError';
-import { User } from '../users/users.model';
 
 const getAllAdmins = async (
   filters: IAdminFilters,
@@ -105,25 +105,14 @@ const deleteAdmin = async (id: string): Promise<IAdmin | null> => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Faculty not found !');
   }
 
-  const session = await mongoose.startSession();
-
-  try {
-    session.startTransaction();
-    //delete student first
-    const student = await Admin.findOneAndDelete({ id }, { session });
-    if (!student) {
-      throw new ApiError(404, 'Failed to delete student');
-    }
-    //delete user
-    await User.deleteOne({ id });
-    session.commitTransaction();
-    session.endSession();
-
-    return student;
-  } catch (error) {
-    session.abortTransaction();
-    throw error;
+  //delete student first
+  const student = await Admin.findOneAndDelete({ id });
+  if (!student) {
+    throw new ApiError(404, 'Failed to delete student');
   }
+  //delete user
+  await User.deleteOne({ id });
+  return student;
 };
 
 export const AdminService = {

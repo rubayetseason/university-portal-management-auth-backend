@@ -16,12 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/', routes);
 
 // //Testing route
-// app.get('/', (req: Request, res: Response, next: NextFunction) => {
-//   //error throw type -1
-//   throw new ApiError(400, 'Working successfully')
-//   //error throw type -2
-//   next('Next er Error')
-// })
+app.get('/', (req: Request, res: Response) => {
+  res.status(httpStatus.OK).json({
+    sucess: true,
+    message: 'Welcome to university portal auth management',
+  });
+});
 
 //global error handler
 app.use(globalErrorHandler);

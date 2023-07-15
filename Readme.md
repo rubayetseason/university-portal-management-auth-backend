@@ -4,7 +4,7 @@ This is the documentation for the Authentication Service component of the Univer
 
 ## Live website link
 
-[Motohub live website link](https://university-auth-backend-sandy.vercel.app/)
+[Live base API link](https://university-auth-backend-sandy.vercel.app/)
 [https://university-auth-backend-sandy.vercel.app/](https://university-auth-backend-sandy.vercel.app/)
 
 ## Functional Requirements

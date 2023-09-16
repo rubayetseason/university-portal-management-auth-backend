@@ -1,10 +1,10 @@
 # University Management System Authentication Service
 
-This is the documentation for the Authentication Service component of the University Management System. The Authentication Service provides authentication and authorization functionalities for the three main roles in the system: Admin, Student, and Faculty. It is built using TypeScript, Express.js, Zod validation, and MongoDB.
+This is the documentation for the Authentication Service component of the University Portal Management System. The Authentication Service provides authentication and authorization functionalities for the three main roles in the system: Admin, Student, and Faculty. It is built using TypeScript, Express.js, Zod validation, and MongoDB.
 
 ## Live website link
 
-[Motohub live website link](https://university-auth-backend-sandy.vercel.app/)
+[Base API URL](https://university-auth-backend-sandy.vercel.app/)
 [https://university-auth-backend-sandy.vercel.app/](https://university-auth-backend-sandy.vercel.app/)
 
 ## Functional Requirements

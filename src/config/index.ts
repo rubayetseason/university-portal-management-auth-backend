@@ -20,5 +20,6 @@ export default {
   },
   redis: {
     url: process.env.REDIS_URL,
+    redis_expires_in: process.env.REDIS_TOKEN_EXPIRES_IN,
   },
 };

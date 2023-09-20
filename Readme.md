@@ -33,66 +33,66 @@ This is the documentation for the Authentication Service component of the Univer
 
 ### User
 
-- `POST api/v1/users/create-student`
-- `POST api/v1/users/create-faculty`
-- `POST api/v1/users/create-admin`
+- `POST api/v1/user/create-student`
+- `POST api/v1/user/create-faculty`
+- `POST api/v1/user/create-admin`
 
 ### Student
 
-- `GET api/v1/students`
-- `GET api/v1/students?searchTerm=fr797`
-- `GET api/v1/students?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET api/v1/students/:id`
-- `PATCH api/v1/students/:id`
-- `DELETE api/v1/students/:id`
+- `GET api/v1/student`
+- `GET api/v1/student?searchTerm=fr797`
+- `GET api/v1/student?page=1&limit=10&sortBy=gender&sortOrder=asc`
+- `GET api/v1/student/:id`
+- `PATCH api/v1/student/:id`
+- `DELETE api/v1/student/:id`
 
 ### Faculty
 
-- `GET api/v1/faculties`
-- `GET api/v1/faculties?searchTerm=john`
-- `GET api/v1/faculties?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET api/v1/faculties/:id`
-- `PATCH api/v1/faculties/:id`
-- `DELETE api/v1/faculties/:id`
+- `GET api/v1/faculty`
+- `GET api/v1/faculty?searchTerm=john`
+- `GET api/v1/faculty?page=1&limit=10&sortBy=gender&sortOrder=asc`
+- `GET api/v1/faculty/:id`
+- `PATCH api/v1/faculty/:id`
+- `DELETE api/v1/faculty/:id`
 
 ### Admin
 
-- `GET api/v1/admins`
-- `GET api/v1/admins?searchTerm=us88`
-- `GET api/v1/admins?page=1&limit=10&sortBy=gender&sortOrder=asc`
-- `GET api/v1/admins/:id`
-- `PATCH api/v1/admins/:id`
-- `DELETE api/v1/admins/:id`
+- `GET api/v1/admin`
+- `GET api/v1/admin?searchTerm=us88`
+- `GET api/v1/admin?page=1&limit=10&sortBy=gender&sortOrder=asc`
+- `GET api/v1/admin/:id`
+- `PATCH api/v1/admin/:id`
+- `DELETE api/v1/admin/:id`
 
 ### Academic Semester
 
-- `POST api/v1/academic-semesters/create-semester`
-- `GET api/v1/academic-semesters`
-- `GET api/v1/academic-semesters?searchTerm=fal`
-- `GET api/v1/academic-semesters?page=1&limit=10&sortBy=year&sortOrder=asc`
-- `GET api/v1/academic-semesters/:id`
-- `PATCH api/v1/academic-semesters/:id`
-- `DELETE api/v1/academic-semesters/:id`
+- `POST api/v1/academic-semester/create-semester`
+- `GET api/v1/academic-semester`
+- `GET api/v1/academic-semester?searchTerm=fal`
+- `GET api/v1/academic-semester?page=1&limit=10&sortBy=year&sortOrder=asc`
+- `GET api/v1/academic-semester/:id`
+- `PATCH api/v1/academic-semester/:id`
+- `DELETE api/v1/academic-semester/:id`
 
 ### Academic Department
 
-- `POST api/v1/academic-departments/create-department`
-- `GET api/v1/academic-departments`
-- `GET api/v1/academic-departments?searchTerm=math`
-- `GET api/v1/academic-departments?page=1&limit=10&sortBy=title&sortOrder=asc`
-- `GET api/v1/academic-departments/:id`
-- `PATCH api/v1/academic-departments/:id`
-- `DELETE api/v1/academic-departments/:id`
+- `POST api/v1/academic-department/create-department`
+- `GET api/v1/academic-department`
+- `GET api/v1/academic-department?searchTerm=math`
+- `GET api/v1/academic-department?page=1&limit=10&sortBy=title&sortOrder=asc`
+- `GET api/v1/academic-department/:id`
+- `PATCH api/v1/academic-department/:id`
+- `DELETE api/v1/academic-department/:id`
 
 ### Academic Faculty
 
-- `POST api/v1/academic-faculties/create-faculty`
-- `GET api/v1/academic-faculties`
-- `GET api/v1/academic-faculties?searchTerm=com`
-- `GET api/v1/academic-faculties?page=1&limit=10&sortBy=title&sortOrder=asc`
-- `GET api/v1/academic-faculties/:id`
-- `PATCH api/v1/academic-faculties/:id`
-- `DELETE api/v1/academic-faculties/:id`
+- `POST api/v1/academic-faculty/create-faculty`
+- `GET api/v1/academic-faculty`
+- `GET api/v1/academic-faculty?searchTerm=com`
+- `GET api/v1/academic-faculty?page=1&limit=10&sortBy=title&sortOrder=asc`
+- `GET api/v1/academic-faculty/:id`
+- `PATCH api/v1/academic-faculty/:id`
+- `DELETE api/v1/academic-faculty/:id`
 
 ### Authentication
 

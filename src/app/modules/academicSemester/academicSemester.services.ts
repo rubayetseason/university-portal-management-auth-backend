@@ -11,6 +11,7 @@ import {
   academicSemesterSearchableFields,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
+
 const createSemester = async (
   payload: IAcademicSemester
 ): Promise<IAcademicSemester> => {

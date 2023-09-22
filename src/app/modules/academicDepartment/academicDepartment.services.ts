@@ -4,7 +4,10 @@ import { academicDepartmentSearchableFields } from './academicDepartment.constan
 
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { paginationHelpers } from '../../../shared/paginationHelper';
+import { AcademicFaculty } from '../academicFaculty/academicFaculty.model';
 import {
+  AcademicDepartmentCreatedEvent,
+  AcademicDepartmentUpdatedEvent,
   IAcademicDepartment,
   IAcademicDepartmentFilters,
 } from './academicDepartment.interface';
@@ -105,10 +108,51 @@ const deleteDepartment = async (
   return result;
 };
 
+const createDepartmentFromEvent = async (
+  e: AcademicDepartmentCreatedEvent
+): Promise<void> => {
+  const academicFaculty = await AcademicFaculty.findOne({
+    syncId: e.academicFacultyId,
+  });
+  const payload = {
+    title: e.title,
+    academicFaculty: academicFaculty?._id,
+    syncId: e.id,
+  };
+
+  await AcademicDepartment.create(payload);
+};
+
+const updateDepartmentFromEvent = async (
+  e: AcademicDepartmentUpdatedEvent
+): Promise<void> => {
+  const academicFaculty = await AcademicFaculty.findOne({
+    syncId: e.academicFacultyId,
+  });
+  const payload = {
+    title: e.title,
+    academicFaculty: academicFaculty?._id,
+  };
+
+  await AcademicDepartment.findOneAndUpdate(
+    { syncId: e.id },
+    {
+      $set: payload,
+    }
+  );
+};
+
+const deleteDepartmentFromEvent = async (syncId: string): Promise<void> => {
+  await AcademicDepartment.findOneAndDelete({ syncId });
+};
+
 export const AcademicDepartmentService = {
   getAllDepartments,
   getSingleDepartment,
   updateDepartment,
   deleteDepartment,
   createDepartment,
+  createDepartmentFromEvent,
+  updateDepartmentFromEvent,
+  deleteDepartmentFromEvent,
 };

@@ -42,7 +42,7 @@ export const academicSemesterFilterableFields = [
 
 export type IAcademicSemesterCreatedEvent = {
   title: string;
-  year: string;
+  year: number;
   code: string;
   startMonth: string;
   endMonth: string;

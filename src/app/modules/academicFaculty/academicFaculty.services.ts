@@ -4,6 +4,8 @@ import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { paginationHelpers } from '../../../shared/paginationHelper';
 import { academicFacultySearchableFields } from './academicFaculty.constants';
 import {
+  AcademicFacultyCreatedEvent,
+  AcademicFacultyUpdatedEvent,
   IAcademicFaculty,
   IAcademicFacultyFilters,
 } from './academicFaculty.interface';
@@ -87,11 +89,35 @@ const updateFaculty = async (
   return result;
 };
 
-const deleteByIdFromDB = async (
-  id: string
-): Promise<IAcademicFaculty | null> => {
+const deleteFaculty = async (id: string): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findByIdAndDelete(id);
   return result;
+};
+
+const createFacultyFromEvent = async (
+  e: AcademicFacultyCreatedEvent
+): Promise<void> => {
+  await AcademicFaculty.create({
+    syncId: e.id,
+    title: e.title,
+  });
+};
+
+const updateFacultyFromEvent = async (
+  e: AcademicFacultyUpdatedEvent
+): Promise<void> => {
+  await AcademicFaculty.findOneAndUpdate(
+    { syncId: e.id },
+    {
+      $set: {
+        title: e.title,
+      },
+    }
+  );
+};
+
+const deleteFacultyFromEvent = async (syncId: string): Promise<void> => {
+  await AcademicFaculty.findOneAndDelete({ syncId });
 };
 
 export const AcademicFacultyService = {
@@ -99,5 +125,8 @@ export const AcademicFacultyService = {
   getAllFaculties,
   getSingleFaculty,
   updateFaculty,
-  deleteByIdFromDB,
+  deleteFaculty,
+  createFacultyFromEvent,
+  updateFacultyFromEvent,
+  deleteFacultyFromEvent,
 };

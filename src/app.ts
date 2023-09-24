@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 //Application routes
 app.use('/api/v1/', routes);
 
-// //Testing route
 app.get('/', (req: Request, res: Response) => {
   res.status(httpStatus.OK).json({
     sucess: true,

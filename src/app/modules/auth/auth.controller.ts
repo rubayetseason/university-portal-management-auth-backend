@@ -11,7 +11,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.loginUser(loginData);
 
   //not send the refreshToken result but set it in cookie
-  const { refreshToken, ...others } = result;
+  const { refreshToken } = result;
 
   //set refreshToken in cookie
   const cookieOptions = {
@@ -24,7 +24,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User login successful',
-    data: others,
+    data: result,
   });
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {

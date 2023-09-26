@@ -6,8 +6,12 @@ import ApiError from '../../../errors/ApiError';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { paginationHelpers } from '../../../shared/paginationHelper';
+import { RedisClient } from '../../../shared/redis';
 import { User } from '../users/users.model';
-import { facultySearchableFields } from './faculty.constants';
+import {
+  EVENT_FACULTY_UPDATED,
+  facultySearchableFields,
+} from './faculty.constants';
 import { IFaculty, IFacultyFilters } from './faculty.interface';
 import { Faculty } from './faculty.model';
 
@@ -97,6 +101,11 @@ const updateFaculty = async (
   const result = await Faculty.findOneAndUpdate({ id }, updatedFacultyData, {
     new: true,
   });
+
+  if (result) {
+    await RedisClient.publish(EVENT_FACULTY_UPDATED, JSON.stringify(result));
+  }
+
   return result;
 };
 

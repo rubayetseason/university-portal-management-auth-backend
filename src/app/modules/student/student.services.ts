@@ -5,7 +5,11 @@ import ApiError from '../../../errors/ApiError';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import { paginationHelpers } from '../../../shared/paginationHelper';
-import { studentSearchableFields } from './student.constants';
+import { RedisClient } from '../../../shared/redis';
+import {
+  EVENT_STUDENT_UPDATED,
+  studentSearchableFields,
+} from './student.constants';
 import { IStudent, IStudentFilters } from './student.interface';
 import { Student } from './student.model';
 
@@ -114,7 +118,13 @@ const updateStudent = async (
 
   const result = await Student.findOneAndUpdate({ id }, updatedStudentData, {
     new: true,
-  });
+  })
+    .populate('academicFaculty')
+    .populate('academicDepartment')
+    .populate('academicSemester');
+  if (result) {
+    await RedisClient.publish(EVENT_STUDENT_UPDATED, JSON.stringify(result));
+  }
   return result;
 };
 

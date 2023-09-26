@@ -9,7 +9,10 @@ import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { IStudent } from '../student/student.interface';
 import { Student } from '../student/student.model';
-import { EVENT_STUDENT_CREATED } from './users.constants';
+import {
+  EVENT_FACULTY_CREATED,
+  EVENT_STUDENT_CREATED,
+} from './users.constants';
 import { IUser } from './users.interface';
 import { User } from './users.model';
 import {
@@ -139,6 +142,13 @@ const createFaculty = async (
         },
       ],
     });
+  }
+
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_FACULTY_CREATED,
+      JSON.stringify(newUserAllData.faculty)
+    );
   }
 
   return newUserAllData;
